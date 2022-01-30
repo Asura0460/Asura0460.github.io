@@ -1,0 +1,222 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="认识一下爬虫概念8">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python爬虫-爬虫概念">
+<meta property="og:url" content="http://example.com/2022/01/30/python%E7%88%AC%E8%99%AB-%E7%88%AC%E8%99%AB%E6%A6%82%E5%BF%B5/index.html">
+<meta property="og:site_name" content="Welcome to Asura&#39;s blog!">
+<meta property="og:description" content="认识一下爬虫概念8">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-01-30T07:23:00.000Z">
+<meta property="article:modified_time" content="2022-01-30T09:16:52.561Z">
+<meta property="article:author" content="Asura">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary"><title>Python爬虫-爬虫概念 | Welcome to Asura's blog!</title><link ref="canonical" href="http://example.com/2022/01/30/python%E7%88%AC%E8%99%AB-%E7%88%AC%E8%99%AB%E6%A6%82%E5%BF%B5/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":true},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: {"avoidBanner":true},
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"复制","copySuccess":"复制成功","copyError":"复制失败"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 6.0.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">归档</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">Welcome to Asura's blog!</div><div class="header-banner-info__subtitle">This town needs an enema.</div></div><div class="header-banner-arrow"><div class="header-banner-arrow__icon"><i class="fas fa-angle-down"></i></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">Python爬虫-爬虫概念</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2022-01-30</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2022-01-30</span></span><span class="post-meta-item post-meta-item--visitors leancloud_visitors" id="/2022/01/30/python%E7%88%AC%E8%99%AB-%E7%88%AC%E8%99%AB%E6%A6%82%E5%BF%B5/" data-flag-title="Python爬虫-爬虫概念"><span class="post-meta-item__icon"><i class="fas fa-eye"></i></span><span class="post-meta-item__info">阅读次数</span><span class="post-meta-item__value leancloud-visitors-count"></span></span><span class="post-meta-item post-meta-item--visitors"><span class="post-meta-item__icon"><i class="fas fa-eye"></i></span><span class="post-meta-item__info">阅读次数</span><span class="post-meta-item__value" id="busuanzi_value_page_pv"></span></span></div></header><div class="post-body">
+        <h2 id="什么是爬虫"   >
+          <a href="#什么是爬虫" class="heading-link"><i class="fas fa-link"></i></a><a href="#什么是爬虫" class="headerlink" title="什么是爬虫"></a><strong><u>什么是爬虫</u></strong></h2>
+      <p>解释1：通过一个程序，根据Url(<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://www.taobao.com/" >http://www.taobao.com</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>) 进行爬取网页，获取有用信息。<br>解释2：使用程序模拟浏览器，去向服务器发送请求，获取响应信息。</p>
+
+        <h2 id="爬虫核心"   >
+          <a href="#爬虫核心" class="heading-link"><i class="fas fa-link"></i></a><a href="#爬虫核心" class="headerlink" title="爬虫核心"></a><u><strong>爬虫核心</strong></u></h2>
+      <p>1.爬取网页：爬取整个网页 包含了网页中所有得内容。<br>2.解析数据：将网页中你得到的数据 进行解析。<br>3.难点：爬虫和反爬虫之间的博弈。</p>
+
+        <h2 id="爬虫用途"   >
+          <a href="#爬虫用途" class="heading-link"><i class="fas fa-link"></i></a><a href="#爬虫用途" class="headerlink" title="爬虫用途"></a><strong><u>爬虫用途</u></strong></h2>
+      <p>·数据分析/人工数据集<br>·社交软件冷启动<br>·舆情监控<br>·竞争对手监控<br>（<strong>爬虫在出行行业运用最多，像12306这种网站经常被购票软件光顾。</strong>）</p>
+
+        <h2 id="爬虫分类"   >
+          <a href="#爬虫分类" class="heading-link"><i class="fas fa-link"></i></a><a href="#爬虫分类" class="headerlink" title="爬虫分类"></a><strong><u>爬虫分类</u></strong></h2>
+      
+        <h3 id="聚焦爬虫"   >
+          <a href="#聚焦爬虫" class="heading-link"><i class="fas fa-link"></i></a><a href="#聚焦爬虫" class="headerlink" title="聚焦爬虫"></a>聚焦爬虫</h3>
+      <pre><code>功能
+    根据需求，实现爬虫程序，抓取需要的数据 
+设计思路   
+1.确定要爬取的url 
+    如何获取Url 
+2.模拟浏览器通过http协议访问url，获取服务器返回的html代码 
+    如何访问 
+3.解析html字符串（根据一定规则提取需要的数据） 
+    如何解析
+    
+</code></pre>
+
+        <h3 id="通用爬虫："   >
+          <a href="#通用爬虫：" class="heading-link"><i class="fas fa-link"></i></a><a href="#通用爬虫：" class="headerlink" title="通用爬虫："></a>通用爬虫：</h3>
+      <pre><code>实例 
+    百度、360、google、sougou等搜索引擎‐‐‐伯乐在线 
+功能 
+    访问网页‐&gt;抓取数据‐&gt;数据存储‐&gt;数据处理‐&gt;提供检索服务  
+robots协议 
+        一个约定俗成的协议，添加robots.txt文件，来说明本网站哪些内容不可以被抓取，起不到限制作用 自己写的爬虫无需遵守 
+网站排名(SEO) 
+        1. 根据pagerank算法值进行排名（参考个网站流量、点击率等指标） 
+        2. 百度竞价排名 
+缺点 
+        1. 抓取的数据大多是无用的 
+        2.不能根据用户的需求来精准获取数据
+</code></pre>
+<p>（<strong>通用爬虫像百度这种搜索引擎并不是靠访问量来对网站进行排名，而是谁给的钱多就排前面，所以没有太大的爬取价值。</strong>）</p>
+
+        <h2 id="反爬手段"   >
+          <a href="#反爬手段" class="heading-link"><i class="fas fa-link"></i></a><a href="#反爬手段" class="headerlink" title="反爬手段"></a><strong><u>反爬手段</u></strong></h2>
+      
+        <h3 id="1-User-Agent"   >
+          <a href="#1-User-Agent" class="heading-link"><i class="fas fa-link"></i></a><a href="#1-User-Agent" class="headerlink" title="1.User-Agent:"></a>1.User-Agent:</h3>
+      <pre><code>    User Agent中文名为用户代理，简称 UA，它是一个特殊字符串头，使得服务器能够识别客户使用的操作系统及版 本、CPU 类型、浏览器及版本、浏览器渲染引擎、浏览器语言、浏览器插件等。
+</code></pre>
+
+        <h3 id="2-代理IP"   >
+          <a href="#2-代理IP" class="heading-link"><i class="fas fa-link"></i></a><a href="#2-代理IP" class="headerlink" title="2.代理IP"></a>2.代理IP</h3>
+      <pre><code>西次代理 快代理 什么是高匿名、匿名和透明代理？它们有什么区别？ 
+1.使用透明代理，对方服务器可以知道你使用了代理，并且也知道你的真实IP。 
+2.使用匿名代理，对方服务器可以知道你使用了代理，但不知道你的真实IP。 
+3.使用高匿名代理，对方服务器不知道你使用了代理，更不知道你的真实IP。 
+</code></pre>
+
+        <h3 id="3-验证码访问"   >
+          <a href="#3-验证码访问" class="heading-link"><i class="fas fa-link"></i></a><a href="#3-验证码访问" class="headerlink" title="3.验证码访问"></a>3.验证码访问</h3>
+      <pre><code>打码平台 
+云打码平台 
+超级🦅 
+</code></pre>
+
+        <h3 id="4-动态加载网页"   >
+          <a href="#4-动态加载网页" class="heading-link"><i class="fas fa-link"></i></a><a href="#4-动态加载网页" class="headerlink" title="4.动态加载网页"></a>4.动态加载网页</h3>
+      <pre><code>网站返回的是js数据 并不是网页的真实数据 selenium驱动真实的浏览器发送请求 
+</code></pre>
+
+        <h3 id="5-数据加密"   >
+          <a href="#5-数据加密" class="heading-link"><i class="fas fa-link"></i></a><a href="#5-数据加密" class="headerlink" title="5.数据加密"></a>5.数据加密</h3>
+      <pre><code>分析js代码
+</code></pre>
+<p>[]: <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://www.taobao.com/" >http://www.taobao.com</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="http://example.com">Asura</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文链接: </span><span class="copyright-link__value"><a href="http://example.com/2022/01/30/python%E7%88%AC%E8%99%AB-%E7%88%AC%E8%99%AB%E6%A6%82%E5%BF%B5/">http://example.com/2022/01/30/python%E7%88%AC%E8%99%AB-%E7%88%AC%E8%99%AB%E6%A6%82%E5%BF%B5/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版权声明: </span><span class="copyright-notice__value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="http://example.com/tags/Python/">Python</a></span></div><nav class="post-paginator paginator"><div class="paginator-next"><a class="paginator-next__link" href="/2022/01/27/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/"><span class="paginator-prev__text">我的第一篇博客</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div><div class="comments" id="comments"><div id="valine-container"></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%88%AC%E8%99%AB"><span class="toc-number">1.</span> <span class="toc-text">
+          什么是爬虫</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%88%AC%E8%99%AB%E6%A0%B8%E5%BF%83"><span class="toc-number">2.</span> <span class="toc-text">
+          爬虫核心</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%88%AC%E8%99%AB%E7%94%A8%E9%80%94"><span class="toc-number">3.</span> <span class="toc-text">
+          爬虫用途</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%88%AC%E8%99%AB%E5%88%86%E7%B1%BB"><span class="toc-number">4.</span> <span class="toc-text">
+          爬虫分类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%81%9A%E7%84%A6%E7%88%AC%E8%99%AB"><span class="toc-number">4.1.</span> <span class="toc-text">
+          聚焦爬虫</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E7%94%A8%E7%88%AC%E8%99%AB%EF%BC%9A"><span class="toc-number">4.2.</span> <span class="toc-text">
+          通用爬虫：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E7%88%AC%E6%89%8B%E6%AE%B5"><span class="toc-number">5.</span> <span class="toc-text">
+          反爬手段</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-User-Agent"><span class="toc-number">5.1.</span> <span class="toc-text">
+          1.User-Agent:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E4%BB%A3%E7%90%86IP"><span class="toc-number">5.2.</span> <span class="toc-text">
+          2.代理IP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E9%AA%8C%E8%AF%81%E7%A0%81%E8%AE%BF%E9%97%AE"><span class="toc-number">5.3.</span> <span class="toc-text">
+          3.验证码访问</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD%E7%BD%91%E9%A1%B5"><span class="toc-number">5.4.</span> <span class="toc-text">
+          4.动态加载网页</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E6%95%B0%E6%8D%AE%E5%8A%A0%E5%AF%86"><span class="toc-number">5.5.</span> <span class="toc-text">
+          5.数据加密</span></a></li></ol></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/android-chrome-512x512.png" alt="avatar"></div><p class="sidebar-ov-author__text">This town needs an enema.</p></div><div class="sidebar-ov-social"><a class="sidebar-ov-social-item" href="suhang01251120" target="_blank" rel="noopener" data-popover="微信" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-weixin"></i></span></a><a class="sidebar-ov-social-item" href="761175224" target="_blank" rel="noopener" data-popover="QQ" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-qq"></i></span></a></div><div class="sidebar-ov-feed"><span class="sidebar-ov-feed-email"><a class="sidebar-ov-feed-email__link" href="761175224@qq.com" target="_blank" rel="noopener"><span class="sidebar-ov-feed-email__icon"><i class="fas fa-envelope"></i></span><span>Email 订阅</span></a></span></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">2</div><div class="sidebar-ov-state-item__name">归档</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="知识共享许可协议" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2022</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Asura All Rights Reserved</span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 强力驱动</span><span> v6.0.0</span><span class="footer__devider">|</span><span>主题 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div><div class="busuanzi"><span class="busuanzi-siteuv"><span class="busuanzi-siteuv__icon"><i class="fas fa-user"></i></span><span class="busuanzi-siteuv__info">访问人数</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_uv"></span></span><span class="busuanzi-sitepv"><span class="busuanzi-siteuv__icon"><i class="fas fa-eye"></i></span><span class="busuanzi-siteuv__info">浏览总量</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_pv"></span></span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax@latest/pjax.min.js"></script><script>window.addEventListener('DOMContentLoaded', function () {
+  var pjax = new Pjax({"selectors":["head title","#main",".pjax-reload"],"history":true,"scrollTo":false,"scrollRestoration":false,"cacheBust":false,"debug":false,"currentUrlFullReload":false,"timeout":0});
+  // 加载进度条的计时器
+  var loadingTimer = null;
+
+  // 重置页面 Y 方向上的滚动偏移量
+  document.addEventListener('pjax:send', function () {
+    $('.header-nav-menu').removeClass('show');
+    if (CONFIG.pjax && CONFIG.pjax.avoidBanner) {
+      $('html').velocity('scroll', {
+        duration: 500,
+        offset: $('#header').height(),
+        easing: 'easeInOutCubic'
+      });
+    }
+
+    var loadingBarWidth = 20;
+    var MAX_LOADING_WIDTH = 95;
+
+    $('.loading-bar').addClass('loading');
+    $('.loading-bar__progress').css('width', loadingBarWidth + '%');
+    clearInterval(loadingTimer);
+    loadingTimer = setInterval(function () {
+      loadingBarWidth += 3;
+      if (loadingBarWidth > MAX_LOADING_WIDTH) {
+        loadingBarWidth = MAX_LOADING_WIDTH;
+      }
+      $('.loading-bar__progress').css('width', loadingBarWidth + '%');
+    }, 500);
+  }, false);
+
+  window.addEventListener('pjax:complete', function () {
+    clearInterval(loadingTimer);
+    $('.loading-bar__progress').css('width', '100%');
+    $('.loading-bar').removeClass('loading');
+    setTimeout(function () {
+      $('.loading-bar__progress').css('width', '0');
+    }, 400);
+    $('link[rel=prefetch], script[data-pjax-rm]').each(function () {
+      $(this).remove();
+    });
+    $('script[data-pjax], #pjax-reload script').each(function () {
+      $(this).parent().append($(this).remove());
+    });
+
+    if (Stun.utils.pjaxReloadBoot) {
+      Stun.utils.pjaxReloadBoot();
+    }
+    if (Stun.utils.pjaxReloadScroll) {
+      Stun.utils.pjaxReloadScroll();
+    }
+    if (Stun.utils.pjaxReloadSidebar) {
+      Stun.utils.pjaxReloadSidebar();
+    }
+    if (false) {
+      if (Stun.utils.pjaxReloadHeader) {
+        Stun.utils.pjaxReloadHeader();
+      }
+      if (Stun.utils.pjaxReloadScrollIcon) {
+        Stun.utils.pjaxReloadScrollIcon();
+      }
+      if (Stun.utils.pjaxReloadLocalSearch) {
+        Stun.utils.pjaxReloadLocalSearch();
+      }
+    }
+  }, false);
+}, false);</script><div id="pjax-reload"><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script></div><script src="https://cdn.jsdelivr.net/npm/leancloud-storage@latest/dist/av-min.js"></script><script src="https://cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script><script data-pjax="">function loadValine () {
+  var GUEST_INFO = ['nick', 'mail', 'link'];
+  var guest_info = 'nick,mail,link';
+
+  guest_info = guest_info.split(',').filter(function(item) {
+    return GUEST_INFO.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#valine-container',
+    appId: '72SikojFIri4QN4S17ct9f1z-gzGzoHsz',
+    appKey: 'bVxKaIz5KMt58VjSWJTWIn00',
+    notify: true,
+    verify: false,
+    placeholder: 'Just go go',
+    avatar: 'mp',
+    meta: guest_info,
+    pageSize: '10' || 10,
+    visitor: true,
+    recordIP: true,
+    lang: 'zh-ch' || 'zh-cn',
+    path: window.location.pathname
+  });
+}
+
+if (true) {
+  loadValine();
+} else {
+  window.addEventListener('DOMContentLoaded', loadValine, false);
+}</script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>
