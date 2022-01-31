@@ -1,0 +1,193 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="在学习爬虫之前必须要清楚网页的页面结构，才能便于我们过滤出有用的信息(ง •_•)ง。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python爬虫-页面结构">
+<meta property="og:url" content="http://example.com/2022/01/31/Python%E7%88%AC%E8%99%AB-%E9%A1%B5%E9%9D%A2%E7%BB%93%E6%9E%84/index.html">
+<meta property="og:site_name" content="Welcome to Asura&#39;s blog!">
+<meta property="og:description" content="在学习爬虫之前必须要清楚网页的页面结构，才能便于我们过滤出有用的信息(ง •_•)ง。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/screenshot/1643608572(1).png">
+<meta property="og:image" content="http://example.com/_posts/screenshot/1643609595(1).png">
+<meta property="og:image" content="http://example.com/screenshot/1643609717.png">
+<meta property="og:image" content="https://github.com/Asura0460/photo/blob/main/1643610135(1).jpg?raw=true">
+<meta property="article:published_time" content="2022-01-31T06:23:56.000Z">
+<meta property="article:modified_time" content="2022-01-31T07:20:08.518Z">
+<meta property="article:author" content="Asura">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/screenshot/1643608572(1).png"><title>Python爬虫-页面结构 | Welcome to Asura's blog!</title><link ref="canonical" href="http://example.com/2022/01/31/Python%E7%88%AC%E8%99%AB-%E9%A1%B5%E9%9D%A2%E7%BB%93%E6%9E%84/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":true},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: {"avoidBanner":true},
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"复制","copySuccess":"复制成功","copyError":"复制失败"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 6.0.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">归档</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">Welcome to Asura's blog!</div><div class="header-banner-info__subtitle">This town needs an enema.</div></div><div class="header-banner-arrow"><div class="header-banner-arrow__icon"><i class="fas fa-angle-down"></i></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">Python爬虫-页面结构</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2022-01-31</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2022-01-31</span></span><span class="post-meta-item post-meta-item--visitors leancloud_visitors" id="/2022/01/31/Python%E7%88%AC%E8%99%AB-%E9%A1%B5%E9%9D%A2%E7%BB%93%E6%9E%84/" data-flag-title="Python爬虫-页面结构"><span class="post-meta-item__icon"><i class="fas fa-eye"></i></span><span class="post-meta-item__info">阅读次数</span><span class="post-meta-item__value leancloud-visitors-count"></span></span><span class="post-meta-item post-meta-item--visitors"><span class="post-meta-item__icon"><i class="fas fa-eye"></i></span><span class="post-meta-item__info">阅读次数</span><span class="post-meta-item__value" id="busuanzi_value_page_pv"></span></span></div></header><div class="post-body">
+        <h1 id="了解页面结构"   >
+          <a href="#了解页面结构" class="heading-link"><i class="fas fa-link"></i></a><a href="#了解页面结构" class="headerlink" title="了解页面结构"></a>了解页面结构</h1>
+      <p>我们知道爬虫作用的对象是一个个复杂的网页，而要从一个网页庞大的数据中提取出我们想要的信息，就要先了解网页页面的结构，找到其中的规律。<br>一个网页页面是使用HTML来描述的。HTML是HyperTextMarkup Language的缩写，意思是超文本标记语言。为了描述复杂的页面元素，还引入了标签Mark的概念。标签都是使用&lt;&gt;括起来的字符串，其中大部分标签都是成对的，如<code>&lt;html&gt;&lt;/html&gt;</code>、<code>&lt;head&gt;&lt;/head&gt;</code>、<code>&lt;body&gt;&lt;/body&gt;</code>等等，<strong>其中不带斜杠的称为起始标签，而带斜杠的称为结束标签，两个标签之间的是内容部分，这类成对的称为闭合标签</strong>；也有部分闭合标签是单个的，如<code>&lt;br/&gt;</code>、<code>&lt;hr/&gt;</code>,一般建议在这种标签后面加上斜杠。<strong>而不加斜杠的称为非闭合标签。</strong></p>
+<p>通过这些标签可以定义网页的结构，一个标准的页面基本结构为：</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;zh-Hans&quot;&gt;</span><br><span class="line">  &lt;head&gt;</span><br><span class="line">    &lt;meta charset=gb18030&quot; /&gt;</span><br><span class="line">    &lt;title&gt;标题&lt;/title&gt;</span><br><span class="line">  &lt;/head&gt;</span><br><span class="line">  &lt;body&gt;</span><br><span class="line">    页面内容</span><br><span class="line">  &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></div></figure>
+
+<p>其中可以看出，整个页面包含在<code>&lt;html&gt;</code>、<code>&lt;/html&gt;</code>标签之间，其中分为两部分，<code>&lt;head&gt;</code>、<code>&lt;/head&gt;</code>为网页头部，用来设置页面相关的参数；<code>&lt;body&gt;</code>、<code>&lt;/body&gt;</code>之间为页体部分，其中包含页面的内容。参数大多是使用<code>&lt;meta/&gt;</code>标签来定义，例如charset用来设置网页使用的字符集。而title就是标题噜。</p>
+
+        <h1 id="常用的标签"   >
+          <a href="#常用的标签" class="heading-link"><i class="fas fa-link"></i></a><a href="#常用的标签" class="headerlink" title="常用的标签"></a>常用的标签</h1>
+      
+        <h3 id="①table：表格"   >
+          <a href="#①table：表格" class="heading-link"><i class="fas fa-link"></i></a><a href="#①table：表格" class="headerlink" title="①table：表格"></a>①table：表格</h3>
+      <figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;table&gt;&lt;/table&gt;</span><br></pre></td></tr></table></div></figure>
+
+<p>表格中可以添加属性长、宽、高：</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;table width=&quot;200px&quot; height=&quot;200px&quot; boder=&quot;1px&quot;&gt;</span><br><span class="line">&lt;/table&gt;</span><br></pre></td></tr></table></div></figure>
+
+
+        <h3 id="②tr：行、td-列"   >
+          <a href="#②tr：行、td-列" class="heading-link"><i class="fas fa-link"></i></a><a href="#②tr：行、td-列" class="headerlink" title="②tr：行、td:列"></a>②tr：行、td:列</h3>
+      <p>在table表格中添加行、列</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;table width=&quot;200px&quot; height=&quot;200px&quot; border=&quot;1px&quot;&gt;</span><br><span class="line">            &lt;tr&gt;</span><br><span class="line">                &lt;td&gt;</span><br><span class="line">                    姓名</span><br><span class="line">                &lt;/td&gt;</span><br><span class="line">                &lt;td&gt;</span><br><span class="line">                    年龄</span><br><span class="line">                &lt;/td&gt;</span><br><span class="line">                &lt;td&gt;</span><br><span class="line">                    性别</span><br><span class="line">                &lt;/td&gt;</span><br><span class="line">        &lt;/table&gt;</span><br></pre></td></tr></table></div></figure>
+
+<p>如图：<img src="/screenshot/1643608572(1).png" alt="16436085721(1).png"></p>
+
+        <h3 id="③li：列表项目"   >
+          <a href="#③li：列表项目" class="heading-link"><i class="fas fa-link"></i></a><a href="#③li：列表项目" class="headerlink" title="③li：列表项目"></a>③li：列表项目</h3>
+      <figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;li&gt;&lt;/li&gt;</span><br></pre></td></tr></table></div></figure>
+
+<p>li表示行排列不能单独使用，需要嵌套在ul和ol里面配合使用。</p>
+
+        <h3 id="④ul：无序列表（运用较广）"   >
+          <a href="#④ul：无序列表（运用较广）" class="heading-link"><i class="fas fa-link"></i></a><a href="#④ul：无序列表（运用较广）" class="headerlink" title="④ul：无序列表（运用较广）"></a>④ul：无序列表（运用较广）</h3>
+      <figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul&gt;</span><br><span class="line">            &lt;li&gt;</span><br><span class="line">                大鹅</span><br><span class="line">            &lt;/li&gt;</span><br><span class="line">            &lt;li&gt;    </span><br><span class="line">                小鸡</span><br><span class="line">            &lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/_posts/screenshot/1643609595(1).png" alt="16436095951(1).png"></p>
+
+        <h3 id="⑤ol：有序列表"   >
+          <a href="#⑤ol：有序列表" class="heading-link"><i class="fas fa-link"></i></a><a href="#⑤ol：有序列表" class="headerlink" title="⑤ol：有序列表"></a>⑤ol：有序列表</h3>
+      <figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;ol&gt;</span><br><span class="line">            &lt;li&gt;穿衣&lt;/li&gt;</span><br><span class="line">            &lt;li&gt;下床&lt;/li&gt;</span><br><span class="line">            &lt;li&gt;洗漱&lt;/li&gt;</span><br><span class="line">&lt;/ol&gt;</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/screenshot/1643609717.png" alt="1643609717.png"></p>
+
+        <h3 id="⑥a标签：超链接"   >
+          <a href="#⑥a标签：超链接" class="heading-link"><i class="fas fa-link"></i></a><a href="#⑥a标签：超链接" class="headerlink" title="⑥a标签：超链接"></a>⑥a标签：超链接</h3>
+      <figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=&quot;http://www.baidu.com&quot;&gt;百度&lt;/a&gt;</span><br></pre></td></tr></table></div></figure>
+
+<p><img   src="https://github.com/Asura0460/photo/blob/main/1643610135(1).jpg?raw=true" style=""  alt="16436101351(1).jpg"></p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="http://example.com">Asura</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文链接: </span><span class="copyright-link__value"><a href="http://example.com/2022/01/31/Python%E7%88%AC%E8%99%AB-%E9%A1%B5%E9%9D%A2%E7%BB%93%E6%9E%84/">http://example.com/2022/01/31/Python%E7%88%AC%E8%99%AB-%E9%A1%B5%E9%9D%A2%E7%BB%93%E6%9E%84/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版权声明: </span><span class="copyright-notice__value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="http://example.com/tags/Python/">Python</a></span></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2022/02/01/%E6%96%B0%E5%B9%B4%E5%BF%AB%E4%B9%90%EF%BC%81/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">随笔-新年快乐！</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2022/01/30/python%E7%88%AC%E8%99%AB-%E7%88%AC%E8%99%AB%E6%A6%82%E5%BF%B5/"><span class="paginator-prev__text">Python爬虫-爬虫概念</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div><div class="comments" id="comments"><div id="valine-container"></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%86%E8%A7%A3%E9%A1%B5%E9%9D%A2%E7%BB%93%E6%9E%84"><span class="toc-number">1.</span> <span class="toc-text">
+          了解页面结构</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84%E6%A0%87%E7%AD%BE"><span class="toc-number">2.</span> <span class="toc-text">
+          常用的标签</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%91%A0table%EF%BC%9A%E8%A1%A8%E6%A0%BC"><span class="toc-number">2.0.1.</span> <span class="toc-text">
+          ①table：表格</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%91%A1tr%EF%BC%9A%E8%A1%8C%E3%80%81td-%E5%88%97"><span class="toc-number">2.0.2.</span> <span class="toc-text">
+          ②tr：行、td:列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%91%A2li%EF%BC%9A%E5%88%97%E8%A1%A8%E9%A1%B9%E7%9B%AE"><span class="toc-number">2.0.3.</span> <span class="toc-text">
+          ③li：列表项目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%91%A3ul%EF%BC%9A%E6%97%A0%E5%BA%8F%E5%88%97%E8%A1%A8%EF%BC%88%E8%BF%90%E7%94%A8%E8%BE%83%E5%B9%BF%EF%BC%89"><span class="toc-number">2.0.4.</span> <span class="toc-text">
+          ④ul：无序列表（运用较广）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%91%A4ol%EF%BC%9A%E6%9C%89%E5%BA%8F%E5%88%97%E8%A1%A8"><span class="toc-number">2.0.5.</span> <span class="toc-text">
+          ⑤ol：有序列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%91%A5a%E6%A0%87%E7%AD%BE%EF%BC%9A%E8%B6%85%E9%93%BE%E6%8E%A5"><span class="toc-number">2.0.6.</span> <span class="toc-text">
+          ⑥a标签：超链接</span></a></li></ol></li></ol></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/android-chrome-512x512.png" alt="avatar"></div><p class="sidebar-ov-author__text">This town needs an enema.</p></div><div class="sidebar-ov-social"><a class="sidebar-ov-social-item" href="suhang01251120" target="_blank" rel="noopener" data-popover="微信" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-weixin"></i></span></a><a class="sidebar-ov-social-item" href="761175224" target="_blank" rel="noopener" data-popover="QQ" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-qq"></i></span></a></div><div class="sidebar-ov-feed"><span class="sidebar-ov-feed-email"><a class="sidebar-ov-feed-email__link" href="761175224@qq.com" target="_blank" rel="noopener"><span class="sidebar-ov-feed-email__icon"><i class="fas fa-envelope"></i></span><span>Email 订阅</span></a></span></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">4</div><div class="sidebar-ov-state-item__name">归档</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="知识共享许可协议" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2022</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Asura All Rights Reserved</span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 强力驱动</span><span> v6.0.0</span><span class="footer__devider">|</span><span>主题 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div><div class="busuanzi"><span class="busuanzi-siteuv"><span class="busuanzi-siteuv__icon"><i class="fas fa-user"></i></span><span class="busuanzi-siteuv__info">访问人数</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_uv"></span></span><span class="busuanzi-sitepv"><span class="busuanzi-siteuv__icon"><i class="fas fa-eye"></i></span><span class="busuanzi-siteuv__info">浏览总量</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_pv"></span></span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax@latest/pjax.min.js"></script><script>window.addEventListener('DOMContentLoaded', function () {
+  var pjax = new Pjax({"selectors":["head title","#main",".pjax-reload"],"history":true,"scrollTo":false,"scrollRestoration":false,"cacheBust":false,"debug":false,"currentUrlFullReload":false,"timeout":0});
+  // 加载进度条的计时器
+  var loadingTimer = null;
+
+  // 重置页面 Y 方向上的滚动偏移量
+  document.addEventListener('pjax:send', function () {
+    $('.header-nav-menu').removeClass('show');
+    if (CONFIG.pjax && CONFIG.pjax.avoidBanner) {
+      $('html').velocity('scroll', {
+        duration: 500,
+        offset: $('#header').height(),
+        easing: 'easeInOutCubic'
+      });
+    }
+
+    var loadingBarWidth = 20;
+    var MAX_LOADING_WIDTH = 95;
+
+    $('.loading-bar').addClass('loading');
+    $('.loading-bar__progress').css('width', loadingBarWidth + '%');
+    clearInterval(loadingTimer);
+    loadingTimer = setInterval(function () {
+      loadingBarWidth += 3;
+      if (loadingBarWidth > MAX_LOADING_WIDTH) {
+        loadingBarWidth = MAX_LOADING_WIDTH;
+      }
+      $('.loading-bar__progress').css('width', loadingBarWidth + '%');
+    }, 500);
+  }, false);
+
+  window.addEventListener('pjax:complete', function () {
+    clearInterval(loadingTimer);
+    $('.loading-bar__progress').css('width', '100%');
+    $('.loading-bar').removeClass('loading');
+    setTimeout(function () {
+      $('.loading-bar__progress').css('width', '0');
+    }, 400);
+    $('link[rel=prefetch], script[data-pjax-rm]').each(function () {
+      $(this).remove();
+    });
+    $('script[data-pjax], #pjax-reload script').each(function () {
+      $(this).parent().append($(this).remove());
+    });
+
+    if (Stun.utils.pjaxReloadBoot) {
+      Stun.utils.pjaxReloadBoot();
+    }
+    if (Stun.utils.pjaxReloadScroll) {
+      Stun.utils.pjaxReloadScroll();
+    }
+    if (Stun.utils.pjaxReloadSidebar) {
+      Stun.utils.pjaxReloadSidebar();
+    }
+    if (false) {
+      if (Stun.utils.pjaxReloadHeader) {
+        Stun.utils.pjaxReloadHeader();
+      }
+      if (Stun.utils.pjaxReloadScrollIcon) {
+        Stun.utils.pjaxReloadScrollIcon();
+      }
+      if (Stun.utils.pjaxReloadLocalSearch) {
+        Stun.utils.pjaxReloadLocalSearch();
+      }
+    }
+  }, false);
+}, false);</script><div id="pjax-reload"><script src="//cdn.jsdelivr.net/gh/sukkaw/busuanzi@latest/bsz.pure.mini.js" async></script></div><script src="https://cdn.jsdelivr.net/npm/leancloud-storage@latest/dist/av-min.js"></script><script src="https://cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script><script data-pjax="">function loadValine () {
+  var GUEST_INFO = ['nick', 'mail', 'link'];
+  var guest_info = 'nick,mail,link';
+
+  guest_info = guest_info.split(',').filter(function(item) {
+    return GUEST_INFO.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#valine-container',
+    appId: '72SikojFIri4QN4S17ct9f1z-gzGzoHsz',
+    appKey: 'bVxKaIz5KMt58VjSWJTWIn00',
+    notify: true,
+    verify: false,
+    placeholder: 'Just go go',
+    avatar: 'mp',
+    meta: guest_info,
+    pageSize: '10' || 10,
+    visitor: true,
+    recordIP: true,
+    lang: 'zh-ch' || 'zh-cn',
+    path: window.location.pathname
+  });
+}
+
+if (true) {
+  loadValine();
+} else {
+  window.addEventListener('DOMContentLoaded', loadValine, false);
+}</script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>
