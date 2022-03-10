@@ -1,0 +1,185 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="scrapy还不是很熟练，感到复杂。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python爬虫-scrapy爬当当网">
+<meta property="og:url" content="http://example.com/2022/03/10/Python%E7%88%AC%E8%99%AB-scrapy%E7%88%AC%E5%BD%93%E5%BD%93%E7%BD%91/index.html">
+<meta property="og:site_name" content="Welcome to Asura&#39;s blog!">
+<meta property="og:description" content="scrapy还不是很熟练，感到复杂。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2a3089c3940c498fb8a02f5cd0c747f7.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQXN1cmFfX19fXw==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/92aa3c448b044484b2f5ca9817a1e7d9.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQXN1cmFfX19fXw==,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="article:published_time" content="2022-03-10T11:28:00.000Z">
+<meta property="article:modified_time" content="2022-03-10T12:13:33.507Z">
+<meta property="article:author" content="Asura">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="scrapy">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/2a3089c3940c498fb8a02f5cd0c747f7.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQXN1cmFfX19fXw==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center"><title>Python爬虫-scrapy爬当当网 | Welcome to Asura's blog!</title><link ref="canonical" href="http://example.com/2022/03/10/Python%E7%88%AC%E8%99%AB-scrapy%E7%88%AC%E5%BD%93%E5%BD%93%E7%BD%91/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":true},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: true,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: {"avoidBanner":true},
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"复制","copySuccess":"复制成功","copyError":"复制失败"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 6.0.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">归档</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">Welcome to Asura's blog!</div><div class="header-banner-info__subtitle">This town needs an enema.</div></div><div class="header-banner-arrow"><div class="header-banner-arrow__icon"><i class="fas fa-angle-down"></i></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">Python爬虫-scrapy爬当当网</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2022-03-10</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2022-03-10</span></span><span class="post-meta-item post-meta-item--visitors leancloud_visitors" id="/2022/03/10/Python%E7%88%AC%E8%99%AB-scrapy%E7%88%AC%E5%BD%93%E5%BD%93%E7%BD%91/" data-flag-title="Python爬虫-scrapy爬当当网"><span class="post-meta-item__icon"><i class="fas fa-eye"></i></span><span class="post-meta-item__info">阅读次数</span><span class="post-meta-item__value leancloud-visitors-count"></span></span><span class="post-meta-item post-meta-item--visitors"><span class="post-meta-item__icon"><i class="fas fa-eye"></i></span><span class="post-meta-item__info">阅读次数</span><span class="post-meta-item__value" id="busuanzi_value_page_pv"></span></span></div></header><div class="post-body">
+        <h1 id="scrapy架构组成"   >
+          <a href="#scrapy架构组成" class="heading-link"><i class="fas fa-link"></i></a><a href="#scrapy架构组成" class="headerlink" title="scrapy架构组成"></a>scrapy架构组成</h1>
+      <p>（1）引擎 ‐‐‐》自动运行，无需关注，会自动组织所有的请求对象，分发给下载器<br>（2）下载器 ‐‐‐》从引擎处获取到请求对象后，请求数据<br>（3）spiders ‐‐‐》Spider类定义了如何爬取某个(或某些)网站。包括了爬取的动作(例<br>如:是否跟进链接)以及如何从网页的内容中提取结构化数据(爬取item)。 换句话说，Spider就是您定义爬取的动作及分析某个网页(或者是有些网页)的地方。<br>（4）调度器 ‐‐‐》有自己的调度规则，无需关注<br>（5）管道（Item pipeline） ‐‐‐》最终处理数据的管道，会预留接口供我们处理数据当Item在Spider中被收集之后，它将会被传递到Item Pipeline，一些组件会按照一定的顺序执行对Item的处理。每个item pipeline组件(有时称之为“Item Pipeline”)是实现了简单方法的Python类。他们接收到Item并通过它执行一些行为，同时也决定此Item是否继续通过pipeline，或是被丢弃而不再进行处理。<br>以下是item pipeline的一些典型应用：</p>
+<ol>
+<li>清理HTML数据</li>
+<li>验证爬取的数据(检查item包含某些字段)</li>
+<li>查重(并丢弃)</li>
+<li>将爬取结果保存到数据库中</li>
+</ol>
+
+        <h1 id="scrapy工作原理"   >
+          <a href="#scrapy工作原理" class="heading-link"><i class="fas fa-link"></i></a><a href="#scrapy工作原理" class="headerlink" title="scrapy工作原理"></a>scrapy工作原理</h1>
+      <p><img   src="https://img-blog.csdnimg.cn/2a3089c3940c498fb8a02f5cd0c747f7.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQXN1cmFfX19fXw==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" style="width: image/watermark,type_d3F5LXplbmhlaQ,shadow_50,tepx;height: t_Q1NETiBAQXN1cmFfX19fXwpx;"  alt="在这里插入图片描述"></p>
+
+        <h1 id="yield"   >
+          <a href="#yield" class="heading-link"><i class="fas fa-link"></i></a><a href="#yield" class="headerlink" title="yield"></a>yield</h1>
+      <ol>
+<li>带有 yield 的函数不再是一个普通函数，而是一个生成器generator，可用于迭代</li>
+<li>yield 是一个类似 return 的关键字，迭代一次遇到yield时就返回yield后面(右边)的值。<strong>重点是：下一次迭代时</strong>，从上一次迭代遇到的yield后面的代码(下一行)开始执行。</li>
+</ol>
+
+        <h1 id="案例："   >
+          <a href="#案例：" class="heading-link"><i class="fas fa-link"></i></a><a href="#案例：" class="headerlink" title="案例："></a>案例：</h1>
+      <p>当当网url：’<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://category.dangdang.com/cp01.01.02.00.00.00.html&#39;" >http://category.dangdang.com/cp01.01.02.00.00.00.html&#39;</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span><br>在cmd创建项目<br><code>scrapy startproject  scrapydangdang</code><br>创建爬虫文件</p>
+<figure class="highlight python"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy genspider dang http://category.dangdang.com/cp01<span class="number">.01</span><span class="number">.02</span><span class="number">.00</span><span class="number">.00</span><span class="number">.00</span>.html</span><br></pre></td></tr></table></div></figure>
+
+<p>在items.py中写入：（这一步是定义你要下载的数据都有什么）</p>
+<figure class="highlight python"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Define here the models for your scraped items</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># See documentation in:</span></span><br><span class="line"><span class="comment"># https://docs.scrapy.org/en/latest/topics/items.html</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> scrapy</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ScrapydangdangItem</span>(<span class="params">scrapy.Item</span>):</span></span><br><span class="line">    <span class="comment"># define the fields for your item here like:</span></span><br><span class="line">    <span class="comment"># name = scrapy.Field()</span></span><br><span class="line">    src = scrapy.Field()</span><br><span class="line">    name=scrapy.Field()</span><br><span class="line">    price=scrapy.Field()</span><br></pre></td></tr></table></div></figure>
+
+<p>给src、name、price做定位：<br>（在给图片做定位时发现网站做了懒加载，但是第一张图片没有做懒加载，所以用if语句给区分开）</p>
+<figure class="highlight python"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> scrapy</span><br><span class="line"><span class="keyword">from</span> scrapydangdang.items <span class="keyword">import</span> ScrapydangdangItem</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DangSpider</span>(<span class="params">scrapy.Spider</span>):</span></span><br><span class="line">    name = <span class="string">&#x27;dang&#x27;</span></span><br><span class="line">    allowed_domains = [<span class="string">&#x27;http://category.dangdang.com/cp01.01.02.00.00.00.html&#x27;</span>]</span><br><span class="line">    start_urls = [<span class="string">&#x27;http://category.dangdang.com/cp01.01.02.00.00.00.html&#x27;</span>]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse</span>(<span class="params">self, response</span>):</span></span><br><span class="line"><span class="comment">#//ul[@class=&quot;bigimg&quot;]/li//img/@src</span></span><br><span class="line"><span class="comment">#//ul[@class=&quot;bigimg&quot;]/li//img/@alt</span></span><br><span class="line"><span class="comment">#//ul[@class=&quot;bigimg&quot;]/li//span[@class=&quot;search_now_price&quot;]</span></span><br><span class="line">        li_list=response.xpath(<span class="string">&#x27;//ul[@class=&quot;bigimg&quot;]/li&#x27;</span>)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> li_list:</span><br><span class="line">            src=i.xpath(<span class="string">&#x27;.//img/@data-original&#x27;</span>).extract_first()</span><br><span class="line">            <span class="keyword">if</span> src:</span><br><span class="line">                src=src</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                src=i.xpath(<span class="string">&#x27;.//img/@src&#x27;</span>).extract_first()</span><br><span class="line"></span><br><span class="line">            name=i.xpath(<span class="string">&#x27;.//img/@alt&#x27;</span>).extract_first()</span><br><span class="line">            price=i.xpath(<span class="string">&#x27;.//span[@class=&quot;search_now_price&quot;]&#x27;</span>).extract_first()</span><br><span class="line"></span><br><span class="line">            book=ScrapydangdangItem(src=src,name=name,price=price)</span><br><span class="line">            <span class="comment">#获取一个book 就将一个book交给pipelines</span></span><br><span class="line">            <span class="keyword">yield</span> book</span><br></pre></td></tr></table></div></figure>
+
+<p>来到pipelines.py中使用管道下载：<br>（要使用管道时，要在settings.py中把ITEM_PIPELINES注释解掉）</p>
+<figure class="highlight python"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ITEM_PIPELINES = &#123;</span><br><span class="line">   <span class="string">&#x27;scrapydangdang.pipelines.ScrapydangdangPipeline&#x27;</span>: <span class="number">300</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+<p>这里是name、src、price三个数据下载到一个json文件中。</p>
+<figure class="highlight python"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#settings开启管道</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ScrapydangdangPipeline</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">open_spider</span>(<span class="params">self,spider</span>):</span></span><br><span class="line">        self.fp=<span class="built_in">open</span>(<span class="string">&#x27;book.json&#x27;</span>,<span class="string">&#x27;w&#x27;</span>,encoding=<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line">    <span class="comment">#items就是yield后面的book对象</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">process_item</span>(<span class="params">self, item, spider</span>):</span></span><br><span class="line"></span><br><span class="line">        self.fp.write(<span class="built_in">str</span>(item))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> item</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">close_spider</span>(<span class="params">self,spider</span>):</span></span><br><span class="line">        self.fp.close()</span><br></pre></td></tr></table></div></figure>
+
+<p>这里不宜使用<code>with open(&#39;book.json&#39;,&#39;a&#39;,encoding=&#39;utf-8&#39;)as fp:</code>的形式，因为这种方法每传递一个对象就会打开一次文件，再关上一次文件，对文件的操作过于频繁。</p>
+<p>为了提高下载速度，我们采用多条管道下载。<br>在settings.py中的ITEM_PIPELINES中加上：<br>（管道可以有很多个，而且有优先级，优先级范围是1-1000，值越小优先级越高）</p>
+<figure class="highlight python"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ITEM_PIPELINES = &#123;</span><br><span class="line">   <span class="string">&#x27;scrapydangdang.pipelines.ScrapydangdangPipeline&#x27;</span>: <span class="number">300</span>,</span><br><span class="line">   <span class="string">&#x27;scrapydangdang.pipelines.dangdangdownloadpipeline&#x27;</span>: <span class="number">301</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+<p>然后在pipelines.py中定义管道类：<br>(这一步是下载图片）</p>
+<figure class="highlight python"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> urllib.request</span><br><span class="line"><span class="comment">#&#x27;scrapydangdang.pipelines.dangdangdownloadpipeline&#x27;: 301</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">dangdangdownloadpipeline</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">process_item</span>(<span class="params">self, item, spider</span>):</span></span><br><span class="line">        url=<span class="string">&#x27;http:&#x27;</span>+item.get(<span class="string">&#x27;src&#x27;</span>)</span><br><span class="line">        filename=<span class="string">&#x27;./books/&#x27;</span>+item.get(<span class="string">&#x27;name&#x27;</span>)+<span class="string">&#x27;.jpg&#x27;</span></span><br><span class="line"></span><br><span class="line">        urllib.request.urlretrieve(url=url,filename=filename)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> item</span><br></pre></td></tr></table></div></figure>
+
+<p>cmd中scrapy crawl dang就能启动了：<br><img   src="https://img-blog.csdnimg.cn/92aa3c448b044484b2f5ca9817a1e7d9.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAQXN1cmFfX19fXw==,size_20,color_FFFFFF,t_70,g_se,x_16" style="width: image/watermark,type_d3F5LXplbmhlaQ,shadow_50,tepx;height: t_Q1NETiBAQXN1cmFfX19fXwpx;"  alt="请添加图片描述"></p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="http://example.com">Asura</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文链接: </span><span class="copyright-link__value"><a href="http://example.com/2022/03/10/Python%E7%88%AC%E8%99%AB-scrapy%E7%88%AC%E5%BD%93%E5%BD%93%E7%BD%91/">http://example.com/2022/03/10/Python%E7%88%AC%E8%99%AB-scrapy%E7%88%AC%E5%BD%93%E5%BD%93%E7%BD%91/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版权声明: </span><span class="copyright-notice__value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="http://example.com/tags/Python/">Python</a></span><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="http://example.com/tags/scrapy/">scrapy</a></span></div><div class="post-reward reward"><div class="reward-button">请我喝杯咖啡~</div><div class="reward-qrcode"><span class="reward-qrcode-alipay"><img class="reward-qrcode-alipay__img" src="http://ys-o.ysepan.com/620408643/318532965/kMH37Jp57146K55ILP33cc/%E6%94%AF%E4%BB%98%E5%AE%9D.jpg"><div class="reward-qrcode-alipay__text">支付宝打赏</div></span><span class="reward-qrcode-wechat"><img class="reward-qrcode-wechat__img" src="http://ys-o.ysepan.com/620408642/318532964/k65532L76GMN71kMH37J68/%E5%BE%AE%E4%BF%A1.jpg"><div class="reward-qrcode-wechat__text">微信打赏</div></span></div></div><nav class="post-paginator paginator"><div class="paginator-next"><a class="paginator-next__link" href="/2022/03/08/Python-%E7%88%AC%E8%99%AB-selenium/"><span class="paginator-prev__text">Python爬虫-解析-selenium</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div><div class="comments" id="comments"><div id="valine-container"></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#scrapy%E6%9E%B6%E6%9E%84%E7%BB%84%E6%88%90"><span class="toc-number">1.</span> <span class="toc-text">
+          scrapy架构组成</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#scrapy%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">2.</span> <span class="toc-text">
+          scrapy工作原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#yield"><span class="toc-number">3.</span> <span class="toc-text">
+          yield</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B%EF%BC%9A"><span class="toc-number">4.</span> <span class="toc-text">
+          案例：</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/android-chrome-512x512.png" alt="avatar"></div><p class="sidebar-ov-author__text">This town needs an enema.</p></div><div class="sidebar-ov-social"><a class="sidebar-ov-social-item" href="suhang01251120" target="_blank" rel="noopener" data-popover="微信" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-weixin"></i></span></a><a class="sidebar-ov-social-item" href="761175224" target="_blank" rel="noopener" data-popover="QQ" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-qq"></i></span></a></div><div class="sidebar-ov-feed"><span class="sidebar-ov-feed-email"><a class="sidebar-ov-feed-email__link" href="761175224@qq.com" target="_blank" rel="noopener"><span class="sidebar-ov-feed-email__icon"><i class="fas fa-envelope"></i></span><span>Email 订阅</span></a></span></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">14</div><div class="sidebar-ov-state-item__name">归档</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="知识共享许可协议" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2022</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Asura All Rights Reserved</span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 强力驱动</span><span> v6.0.0</span><span class="footer__devider">|</span><span>主题 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div><div class="busuanzi"><span class="busuanzi-siteuv"><span class="busuanzi-siteuv__icon"><i class="fas fa-user"></i></span><span class="busuanzi-siteuv__info">访问人数</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_uv"></span></span><span class="busuanzi-sitepv"><span class="busuanzi-siteuv__icon"><i class="fas fa-eye"></i></span><span class="busuanzi-siteuv__info">浏览总量</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_pv"></span></span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax@latest/pjax.min.js"></script><script>window.addEventListener('DOMContentLoaded', function () {
+  var pjax = new Pjax({"selectors":["head title","#main",".pjax-reload"],"history":true,"scrollTo":false,"scrollRestoration":false,"cacheBust":false,"debug":false,"currentUrlFullReload":false,"timeout":0});
+  // 加载进度条的计时器
+  var loadingTimer = null;
+
+  // 重置页面 Y 方向上的滚动偏移量
+  document.addEventListener('pjax:send', function () {
+    $('.header-nav-menu').removeClass('show');
+    if (CONFIG.pjax && CONFIG.pjax.avoidBanner) {
+      $('html').velocity('scroll', {
+        duration: 500,
+        offset: $('#header').height(),
+        easing: 'easeInOutCubic'
+      });
+    }
+
+    var loadingBarWidth = 20;
+    var MAX_LOADING_WIDTH = 95;
+
+    $('.loading-bar').addClass('loading');
+    $('.loading-bar__progress').css('width', loadingBarWidth + '%');
+    clearInterval(loadingTimer);
+    loadingTimer = setInterval(function () {
+      loadingBarWidth += 3;
+      if (loadingBarWidth > MAX_LOADING_WIDTH) {
+        loadingBarWidth = MAX_LOADING_WIDTH;
+      }
+      $('.loading-bar__progress').css('width', loadingBarWidth + '%');
+    }, 500);
+  }, false);
+
+  window.addEventListener('pjax:complete', function () {
+    clearInterval(loadingTimer);
+    $('.loading-bar__progress').css('width', '100%');
+    $('.loading-bar').removeClass('loading');
+    setTimeout(function () {
+      $('.loading-bar__progress').css('width', '0');
+    }, 400);
+    $('link[rel=prefetch], script[data-pjax-rm]').each(function () {
+      $(this).remove();
+    });
+    $('script[data-pjax], #pjax-reload script').each(function () {
+      $(this).parent().append($(this).remove());
+    });
+
+    if (Stun.utils.pjaxReloadBoot) {
+      Stun.utils.pjaxReloadBoot();
+    }
+    if (Stun.utils.pjaxReloadScroll) {
+      Stun.utils.pjaxReloadScroll();
+    }
+    if (Stun.utils.pjaxReloadSidebar) {
+      Stun.utils.pjaxReloadSidebar();
+    }
+    if (false) {
+      if (Stun.utils.pjaxReloadHeader) {
+        Stun.utils.pjaxReloadHeader();
+      }
+      if (Stun.utils.pjaxReloadScrollIcon) {
+        Stun.utils.pjaxReloadScrollIcon();
+      }
+      if (Stun.utils.pjaxReloadLocalSearch) {
+        Stun.utils.pjaxReloadLocalSearch();
+      }
+    }
+  }, false);
+}, false);</script><div id="pjax-reload"><script src="//cdn.jsdelivr.net/gh/sukkaw/busuanzi@latest/bsz.pure.mini.js" async></script></div><script src="https://cdn.jsdelivr.net/npm/leancloud-storage@latest/dist/av-min.js"></script><script src="https://cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script><script data-pjax="">function loadValine () {
+  var GUEST_INFO = ['nick', 'mail', 'link'];
+  var guest_info = 'nick,mail,link';
+
+  guest_info = guest_info.split(',').filter(function(item) {
+    return GUEST_INFO.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#valine-container',
+    appId: '72SikojFIri4QN4S17ct9f1z-gzGzoHsz',
+    appKey: 'bVxKaIz5KMt58VjSWJTWIn00',
+    notify: true,
+    verify: false,
+    placeholder: 'Just go go',
+    avatar: 'mp',
+    meta: guest_info,
+    pageSize: '10' || 10,
+    visitor: true,
+    recordIP: true,
+    lang: 'zh-ch' || 'zh-cn',
+    path: window.location.pathname
+  });
+}
+
+if (true) {
+  loadValine();
+} else {
+  window.addEventListener('DOMContentLoaded', loadValine, false);
+}</script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>
