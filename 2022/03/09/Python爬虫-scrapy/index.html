@@ -1,0 +1,166 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="scrapy挺方便。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python爬虫-scrapy基本使用">
+<meta property="og:url" content="http://example.com/2022/03/09/Python%E7%88%AC%E8%99%AB-scrapy/index.html">
+<meta property="og:site_name" content="Welcome to Asura&#39;s blog!">
+<meta property="og:description" content="scrapy挺方便。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-03-09T15:00:00.000Z">
+<meta property="article:modified_time" content="2022-03-13T05:53:11.811Z">
+<meta property="article:author" content="Asura">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="scrapy">
+<meta name="twitter:card" content="summary"><title>Python爬虫-scrapy基本使用 | Welcome to Asura's blog!</title><link ref="canonical" href="http://example.com/2022/03/09/Python%E7%88%AC%E8%99%AB-scrapy/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":true},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: true,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: {"avoidBanner":true},
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"复制","copySuccess":"复制成功","copyError":"复制失败"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 6.0.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">归档</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">Welcome to Asura's blog!</div><div class="header-banner-info__subtitle">This town needs an enema.</div></div><div class="header-banner-arrow"><div class="header-banner-arrow__icon"><i class="fas fa-angle-down"></i></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">Python爬虫-scrapy基本使用</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2022-03-09</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2022-03-13</span></span><span class="post-meta-item post-meta-item--visitors leancloud_visitors" id="/2022/03/09/Python%E7%88%AC%E8%99%AB-scrapy/" data-flag-title="Python爬虫-scrapy基本使用"><span class="post-meta-item__icon"><i class="fas fa-eye"></i></span><span class="post-meta-item__info">阅读次数</span><span class="post-meta-item__value leancloud-visitors-count"></span></span><span class="post-meta-item post-meta-item--visitors"><span class="post-meta-item__icon"><i class="fas fa-eye"></i></span><span class="post-meta-item__info">阅读次数</span><span class="post-meta-item__value" id="busuanzi_value_page_pv"></span></span></div></header><div class="post-body">
+        <h1 id="scrapy是什么？"   >
+          <a href="#scrapy是什么？" class="heading-link"><i class="fas fa-link"></i></a><a href="#scrapy是什么？" class="headerlink" title="scrapy是什么？"></a>scrapy是什么？</h1>
+      <p>Scrapy是一个为了爬取网站数据，提取结构性数据而编写的应用框架。 可以应用在包括数据挖掘，信息处理<br>或存储历史数据等一系列的程序中。</p>
+
+        <h1 id="scrapy项目的创建以及运行"   >
+          <a href="#scrapy项目的创建以及运行" class="heading-link"><i class="fas fa-link"></i></a><a href="#scrapy项目的创建以及运行" class="headerlink" title="scrapy项目的创建以及运行"></a>scrapy项目的创建以及运行</h1>
+      
+        <h3 id="1-创建scrapy项目："   >
+          <a href="#1-创建scrapy项目：" class="heading-link"><i class="fas fa-link"></i></a><a href="#1-创建scrapy项目：" class="headerlink" title="1.创建scrapy项目："></a>1.创建scrapy项目：</h3>
+      <p>终端输入 scrapy startproject 项目名称</p>
+
+        <h3 id="2-项目组成："   >
+          <a href="#2-项目组成：" class="heading-link"><i class="fas fa-link"></i></a><a href="#2-项目组成：" class="headerlink" title="2.项目组成："></a>2.项目组成：</h3>
+      <p>spiders<br><strong>init</strong>.py<br>自定义的爬虫文件.py (由我们自己创建，是实现爬虫核心功能的文件</p>
+<p><strong>init</strong>.py<br>items.py (定义数据结构的地方，是一个继承自scrapy.Item的类<br>middlewares.py (中间件 代理<br>pipelines.py (管道文件，里面只有一个类，用于处理下载数据的后续处理<br>默认是300优先级，值越小优先级越高（1‐1000）<br>settings.py (配置文件 比如：是否遵守robots协议，User‐Agent定义等</p>
+
+        <h3 id="3-创建爬虫文件："   >
+          <a href="#3-创建爬虫文件：" class="heading-link"><i class="fas fa-link"></i></a><a href="#3-创建爬虫文件：" class="headerlink" title="3.创建爬虫文件："></a>3.创建爬虫文件：</h3>
+      <p>（1）跳转到spiders文件夹 cd 目录名字/目录名字/spiders<br>（2）scrapy genspider 爬虫名字 网页的域名<br>爬虫文件的基本组成：<br>继承scrapy.Spider类<br>name = ‘baidu’ ‐‐‐》 运行爬虫文件时使用的名字<br>allowed_domains ‐‐‐》 爬虫允许的域名，在爬取的时候，如果不是此域名之下的<br>url，会被过滤掉<br>start_urls ‐‐‐》 声明了爬虫的起始地址，可以写多个url，一般是一个<br>parse(self, response) ‐‐‐》解析数据的回调函数<br>response.text ‐‐‐》响应的是字符串<br>response.body ‐‐‐》响应的是二进制文件<br>response.xpath()‐》xpath方法的返回值类型是selector列表<br>extract() ‐‐‐》提取的是selector对象的是data<br>extract_first() ‐‐‐》提取的是selector列表中的第一个数据</p>
+
+        <h3 id="4-运行爬虫文件："   >
+          <a href="#4-运行爬虫文件：" class="heading-link"><i class="fas fa-link"></i></a><a href="#4-运行爬虫文件：" class="headerlink" title="4.运行爬虫文件："></a>4.运行爬虫文件：</h3>
+      <p>scrapy crawl 爬虫名称<br>注意：应在spiders文件夹内执行</p>
+<hr>
+<p><strong>示例：百度</strong></p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">import scrapy</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class BaiduSpider(scrapy.Spider):</span><br><span class="line">    # 爬虫的名字  用于运行爬虫的时候 使用的值</span><br><span class="line">    name = &#x27;baidu&#x27;</span><br><span class="line">    # 允许访问的域名</span><br><span class="line">    allowed_domains = [&#x27;http://www.baidu.com&#x27;]</span><br><span class="line">    # 起始的url地址  指的是第一次要访问的域名</span><br><span class="line">    # start_urls 是在allowed_domains的前面添加一个http://</span><br><span class="line">    #             在 allowed_domains的后面添加一个/</span><br><span class="line">    start_urls = [&#x27;http://www.baidu.com/&#x27;]</span><br><span class="line"></span><br><span class="line">    # 是执行了start_urls之后 执行的方法   方法中的response 就是返回的那个对象</span><br><span class="line">    # 相当于 response = urllib.request.urlopen()</span><br><span class="line">    #       response  = requests.get()</span><br><span class="line">    def parse(self, response):</span><br><span class="line">        print(&#x27;苍茫的天涯是我的爱&#x27;)</span><br></pre></td></tr></table></div></figure>
+
+<p>注意要把settings.py里的robots协议给注释掉，这个协议只防君子不防我们。👍</p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="http://example.com">Asura</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文链接: </span><span class="copyright-link__value"><a href="http://example.com/2022/03/09/Python%E7%88%AC%E8%99%AB-scrapy/">http://example.com/2022/03/09/Python%E7%88%AC%E8%99%AB-scrapy/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版权声明: </span><span class="copyright-notice__value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="http://example.com/tags/Python/">Python</a></span><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="http://example.com/tags/scrapy/">scrapy</a></span></div><div class="post-reward reward"><div class="reward-button">请我喝杯咖啡~</div><div class="reward-qrcode"><span class="reward-qrcode-alipay"><img class="reward-qrcode-alipay__img" src="http://ys-o.ysepan.com/620408643/318532965/kMH37Jp57146K55ILP33cc/%E6%94%AF%E4%BB%98%E5%AE%9D.jpg"><div class="reward-qrcode-alipay__text">支付宝打赏</div></span><span class="reward-qrcode-wechat"><img class="reward-qrcode-wechat__img" src="http://ys-o.ysepan.com/620408642/318532964/k65532L76GMN71kMH37J68/%E5%BE%AE%E4%BF%A1.jpg"><div class="reward-qrcode-wechat__text">微信打赏</div></span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2022/03/10/Python%E7%88%AC%E8%99%AB-scrapy%E7%88%AC%E5%BD%93%E5%BD%93%E7%BD%91/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">Python爬虫-scrapy爬当当网</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2022/03/08/Python-%E7%88%AC%E8%99%AB-selenium/"><span class="paginator-prev__text">Python爬虫-解析-selenium</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div><div class="comments" id="comments"><div id="valine-container"></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#scrapy%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">
+          scrapy是什么？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#scrapy%E9%A1%B9%E7%9B%AE%E7%9A%84%E5%88%9B%E5%BB%BA%E4%BB%A5%E5%8F%8A%E8%BF%90%E8%A1%8C"><span class="toc-number">2.</span> <span class="toc-text">
+          scrapy项目的创建以及运行</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%88%9B%E5%BB%BAscrapy%E9%A1%B9%E7%9B%AE%EF%BC%9A"><span class="toc-number">2.0.1.</span> <span class="toc-text">
+          1.创建scrapy项目：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E9%A1%B9%E7%9B%AE%E7%BB%84%E6%88%90%EF%BC%9A"><span class="toc-number">2.0.2.</span> <span class="toc-text">
+          2.项目组成：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%88%9B%E5%BB%BA%E7%88%AC%E8%99%AB%E6%96%87%E4%BB%B6%EF%BC%9A"><span class="toc-number">2.0.3.</span> <span class="toc-text">
+          3.创建爬虫文件：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E8%BF%90%E8%A1%8C%E7%88%AC%E8%99%AB%E6%96%87%E4%BB%B6%EF%BC%9A"><span class="toc-number">2.0.4.</span> <span class="toc-text">
+          4.运行爬虫文件：</span></a></li></ol></li></ol></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/android-chrome-512x512.png" alt="avatar"></div><p class="sidebar-ov-author__text">This town needs an enema.</p></div><div class="sidebar-ov-social"><a class="sidebar-ov-social-item" href="suhang01251120" target="_blank" rel="noopener" data-popover="微信" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-weixin"></i></span></a><a class="sidebar-ov-social-item" href="761175224" target="_blank" rel="noopener" data-popover="QQ" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-qq"></i></span></a></div><div class="sidebar-ov-feed"><span class="sidebar-ov-feed-email"><a class="sidebar-ov-feed-email__link" href="761175224@qq.com" target="_blank" rel="noopener"><span class="sidebar-ov-feed-email__icon"><i class="fas fa-envelope"></i></span><span>Email 订阅</span></a></span></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">16</div><div class="sidebar-ov-state-item__name">归档</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="知识共享许可协议" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2022</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Asura All Rights Reserved</span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 强力驱动</span><span> v6.0.0</span><span class="footer__devider">|</span><span>主题 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div><div class="busuanzi"><span class="busuanzi-siteuv"><span class="busuanzi-siteuv__icon"><i class="fas fa-user"></i></span><span class="busuanzi-siteuv__info">访问人数</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_uv"></span></span><span class="busuanzi-sitepv"><span class="busuanzi-siteuv__icon"><i class="fas fa-eye"></i></span><span class="busuanzi-siteuv__info">浏览总量</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_pv"></span></span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax@latest/pjax.min.js"></script><script>window.addEventListener('DOMContentLoaded', function () {
+  var pjax = new Pjax({"selectors":["head title","#main",".pjax-reload"],"history":true,"scrollTo":false,"scrollRestoration":false,"cacheBust":false,"debug":false,"currentUrlFullReload":false,"timeout":0});
+  // 加载进度条的计时器
+  var loadingTimer = null;
+
+  // 重置页面 Y 方向上的滚动偏移量
+  document.addEventListener('pjax:send', function () {
+    $('.header-nav-menu').removeClass('show');
+    if (CONFIG.pjax && CONFIG.pjax.avoidBanner) {
+      $('html').velocity('scroll', {
+        duration: 500,
+        offset: $('#header').height(),
+        easing: 'easeInOutCubic'
+      });
+    }
+
+    var loadingBarWidth = 20;
+    var MAX_LOADING_WIDTH = 95;
+
+    $('.loading-bar').addClass('loading');
+    $('.loading-bar__progress').css('width', loadingBarWidth + '%');
+    clearInterval(loadingTimer);
+    loadingTimer = setInterval(function () {
+      loadingBarWidth += 3;
+      if (loadingBarWidth > MAX_LOADING_WIDTH) {
+        loadingBarWidth = MAX_LOADING_WIDTH;
+      }
+      $('.loading-bar__progress').css('width', loadingBarWidth + '%');
+    }, 500);
+  }, false);
+
+  window.addEventListener('pjax:complete', function () {
+    clearInterval(loadingTimer);
+    $('.loading-bar__progress').css('width', '100%');
+    $('.loading-bar').removeClass('loading');
+    setTimeout(function () {
+      $('.loading-bar__progress').css('width', '0');
+    }, 400);
+    $('link[rel=prefetch], script[data-pjax-rm]').each(function () {
+      $(this).remove();
+    });
+    $('script[data-pjax], #pjax-reload script').each(function () {
+      $(this).parent().append($(this).remove());
+    });
+
+    if (Stun.utils.pjaxReloadBoot) {
+      Stun.utils.pjaxReloadBoot();
+    }
+    if (Stun.utils.pjaxReloadScroll) {
+      Stun.utils.pjaxReloadScroll();
+    }
+    if (Stun.utils.pjaxReloadSidebar) {
+      Stun.utils.pjaxReloadSidebar();
+    }
+    if (false) {
+      if (Stun.utils.pjaxReloadHeader) {
+        Stun.utils.pjaxReloadHeader();
+      }
+      if (Stun.utils.pjaxReloadScrollIcon) {
+        Stun.utils.pjaxReloadScrollIcon();
+      }
+      if (Stun.utils.pjaxReloadLocalSearch) {
+        Stun.utils.pjaxReloadLocalSearch();
+      }
+    }
+  }, false);
+}, false);</script><div id="pjax-reload"><script src="//cdn.jsdelivr.net/gh/sukkaw/busuanzi@latest/bsz.pure.mini.js" async></script></div><script src="https://cdn.jsdelivr.net/npm/leancloud-storage@latest/dist/av-min.js"></script><script src="https://cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script><script data-pjax="">function loadValine () {
+  var GUEST_INFO = ['nick', 'mail', 'link'];
+  var guest_info = 'nick,mail,link';
+
+  guest_info = guest_info.split(',').filter(function(item) {
+    return GUEST_INFO.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#valine-container',
+    appId: '72SikojFIri4QN4S17ct9f1z-gzGzoHsz',
+    appKey: 'bVxKaIz5KMt58VjSWJTWIn00',
+    notify: true,
+    verify: false,
+    placeholder: 'Just go go',
+    avatar: 'mp',
+    meta: guest_info,
+    pageSize: '10' || 10,
+    visitor: true,
+    recordIP: true,
+    lang: 'zh-ch' || 'zh-cn',
+    path: window.location.pathname
+  });
+}
+
+if (true) {
+  loadValine();
+} else {
+  window.addEventListener('DOMContentLoaded', loadValine, false);
+}</script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>
